@@ -1,24 +1,18 @@
 #include "monty.h"
-global_var var_global;
 /**
- * main - driver function for monty program
- * @ac: int num of arguments
- * @av: opcode file
- * Return: 0
+ * main - an interpreter for Monty ByteCodes files.
+ * @argc: Argument Count
+ * @argv: Argument Value
+ * Return: Exit_Succes(0) or Exit_Failure(1)
  */
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
-	stack_t *stack;
-
-	stack = NULL;
-	if (ac != 2)
+	info.type = LIFO;
+	if (argc != 2)
+		handle_error(2);
+	else
 	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
+	treat_monty(argv[1]);
 	}
-
-	read_file(av[1], &stack);
-    /* recordar liberar memorias */
-	free_dlistint(stack);
-	return (0);
+	return (EXIT_SUCCESS);
 }
